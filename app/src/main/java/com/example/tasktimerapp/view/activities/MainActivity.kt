@@ -17,6 +17,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    // test from Rayan
+
     private val taskViewModel by lazy { ViewModelProvider(this).get(TaskViewModel::class.java) }
     private lateinit var taskRecyclerView: RecyclerView
     private lateinit var adapter: TaskAdapter
