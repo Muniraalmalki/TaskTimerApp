@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskTimerApp">
         <activity
-            android:name=".NewTaskActivity"
+            android:name=".view.activities.NewTaskActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
