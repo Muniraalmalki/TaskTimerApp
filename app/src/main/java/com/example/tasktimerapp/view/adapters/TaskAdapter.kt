@@ -3,6 +3,7 @@ package com.example.tasktimerapp.view.adapters
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasktimerapp.databinding.TaskRowBinding
 import com.example.tasktimerapp.models.Task
@@ -25,9 +26,12 @@ class TaskAdapter(private val activity: MainActivity): RecyclerView.Adapter<Task
             tvTime.text = TimeFormat.getTimerText(task.time)
 
             if (task.isCompleted) {
-                cvTask.setBackgroundColor(Color.parseColor("#c5eae6"))
+               // cvTask.setBackgroundColor(Color.parseColor("#c5eae6"))
+
+                checkBu.isVisible = true
             } else {
-                cvTask.setBackgroundColor(Color.parseColor("#8CD5CD"))
+            checkBu.isVisible = false
+                /// cvTask.setBackgroundColor(Color.parseColor("#8CD5CD"))
             }
 
             tvTime.setOnClickListener {
