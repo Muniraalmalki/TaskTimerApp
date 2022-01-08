@@ -36,9 +36,53 @@ class MainActivity : AppCompatActivity() {
 
         setupRV()
 
+
+
         taskViewModel.getTask().observe(this, {
-                tasks -> adapter.updateRV(tasks)
+
+                tasks ->
+            adapter.updateRV(tasks)
+            binding.toDoDisTV.text = tasks.size.toString()
         })
+
+
+        taskViewModel.getTaskInprogrees().observe(this, { tasks ->
+            binding.inProgressDisTV.text = tasks.size.toString()
+        })
+
+        taskViewModel.getTaskIscomplete().observe(this, { tasks ->
+            binding.doneDisTV.text = tasks.size.toString()
+
+        })
+
+        binding.toDoImageView.setOnClickListener {
+
+            taskViewModel.getTask().observe(this, {
+
+                    tasks ->
+                adapter.updateRV(tasks)
+            })
+        }
+
+
+        binding.doneImageV.setOnClickListener {
+
+            taskViewModel.getTaskIscomplete().observe(this, { tasks ->
+                adapter.updateRV(tasks)
+                binding.doneDisTV.text = tasks.size.toString()
+
+            })
+        }
+
+        binding.inProgressImageV.setOnClickListener {
+
+            taskViewModel.getTaskInprogrees().observe(this, { tasks ->
+                adapter.updateRV(tasks)
+                binding.inProgressDisTV.text = tasks.size.toString()
+            })
+        }
+
+
 
         binding.ivAddNewTask.setOnClickListener{
             val intent = Intent(this, NewTaskActivity::class.java)

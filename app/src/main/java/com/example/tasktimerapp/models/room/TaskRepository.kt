@@ -8,6 +8,9 @@ class TaskRepository(private val taskDao: TaskDao) {
 
     val getTasks: LiveData<List<Task>> = taskDao.getTasks()
 
+    val getTasksIscomplete: LiveData<List<Task>> = taskDao.getTasksIscomplete()
+    val getTasksInprogrees: LiveData<List<Task>> = taskDao.getTasksInprogrees()
+
     suspend fun addTask(task: Task){
         taskDao.addTask(task)
     }

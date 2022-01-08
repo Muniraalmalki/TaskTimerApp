@@ -13,15 +13,27 @@ import kotlinx.coroutines.launch
 class TaskViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: TaskRepository
     private val tasks: LiveData<List<Task>>
-
+    private val tasksIscomplete: LiveData<List<Task>>
+    private val tasksInprogrees: LiveData<List<Task>>
     init {
         val taskDao = TaskDatabase.getDatabase(application).TaskDao()
         repository = TaskRepository(taskDao)
         tasks = repository.getTasks
+        tasksIscomplete = repository.getTasksIscomplete
+        tasksInprogrees = repository.getTasksInprogrees
     }
 
     fun getTask(): LiveData<List<Task>> {
         return tasks
+    }
+    fun getTaskInprogrees(): LiveData<List<Task>> {
+        return tasksInprogrees
+    }
+
+    fun getTaskIscomplete(): LiveData<List<Task>> {
+
+
+        return tasksIscomplete
     }
 
     fun addTask(task: Task) {

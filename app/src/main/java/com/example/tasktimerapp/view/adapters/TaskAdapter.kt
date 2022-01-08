@@ -37,6 +37,11 @@ class TaskAdapter(private val activity: MainActivity): RecyclerView.Adapter<Task
             tvTime.setOnClickListener {
                 activity.startStopTapped(tvTime, task)
             }
+//            checkBu.setOnClickListener {
+//                activity.updateIsCompletedTask(task.isCompleted, task)
+//
+//            }
+
             cvTask.setOnClickListener {
                 activity.updateIsCompletedTask(task.isCompleted, task)
             }
