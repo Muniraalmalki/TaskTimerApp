@@ -46,12 +46,16 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.updateTask(task)
         }
+
+
     }
 
-    fun deleteNote(task: Task){
+    fun deleteTask(task: Task){
         CoroutineScope(Dispatchers.IO).launch {
             repository.deleteTask(task)
         }
     }
+
+
 
 }

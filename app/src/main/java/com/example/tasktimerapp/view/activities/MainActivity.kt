@@ -1,13 +1,23 @@
 package com.example.tasktimerapp.view.activities
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tasktimerapp.R
 import com.example.tasktimerapp.databinding.ActivityMainBinding
 import com.example.tasktimerapp.models.Task
 import com.example.tasktimerapp.services.TimeFormat
@@ -21,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var taskRecyclerView: RecyclerView
     private lateinit var adapter: TaskAdapter
     private lateinit var binding: ActivityMainBinding
-
+    var userInput = ""
     private var timer: Timer? = null
     private var timerTask: TimerTask? = null
     var time = 0.0
@@ -84,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.ivAddNewTask.setOnClickListener{
+        binding.ivAddNewTask.setOnClickListener {
             val intent = Intent(this, NewTaskActivity::class.java)
             startActivity(intent)
         }
@@ -107,9 +117,15 @@ class MainActivity : AppCompatActivity() {
         taskViewModel.editTask(task)
     }
 
-    fun deleteTask(task: Task) {
-        taskViewModel.deleteNote(task)
+    private fun updateTask(task: Task) {
+
+     taskViewModel.editTask(task)
     }
+
+    private fun deleteTask(task: Task) {
+        taskViewModel.deleteTask(task)
+    }
+
 
     fun startStopTapped(tvTime: TextView, task: Task) {
         timer = Timer()
@@ -142,4 +158,59 @@ class MainActivity : AppCompatActivity() {
         }
         timer!!.scheduleAtFixedRate(timerTask, 0, 1000)
     }
+
+    fun dialog(updateOrDelete: String, task: Task) {
+
+
+        if (updateOrDelete.equals("update")) {
+            val builder = AlertDialog.Builder(this)
+            //  set title for alert dialog
+            builder.setTitle("Update Task")
+
+            var input = EditText(this)
+            input.setText(task.name)
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            builder.setView(input)
+
+
+            //performing positive action
+            builder.setPositiveButton("update") { dialogInterface, which ->
+
+                userInput = input.text.toString()
+                val updateTask = Task(task.id,userInput,task.description,task.category,task.time,task.data,task.isCompleted)
+                updateTask(updateTask)
+
+
+            }
+            builder.setNegativeButton("CANCEL") { dialogInterface, which -> }
+            // Create the AlertDialog
+            val alertDialog: AlertDialog = builder.create()
+            // Set other dialog properties
+            // alertDialog.setCancelable(false)
+            alertDialog.show()
+        } else {
+            val builder = AlertDialog.Builder(this)
+            //  set title for alert dialog
+            builder.setTitle("Are you sure to delete Task  ")
+            var input = EditText(this)
+            input.setText(task.name)
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            builder.setView(input)
+            //performing positive action
+            builder.setPositiveButton("Delete") { dialogInterface, which ->
+                userInput = input.text.toString()
+                deleteTask(task)
+
+            }
+            builder.setNegativeButton("CANCEL") { dialogInterface, which -> }
+            // Create the AlertDialog
+            val alertDialog: AlertDialog = builder.create()
+            // Set other dialog properties
+            alertDialog.setCancelable(true)
+            alertDialog.show()
+        }
+
+
+    }
+
 }

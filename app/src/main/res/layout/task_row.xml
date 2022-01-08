@@ -31,13 +31,35 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/btnDelete"
-                    android:layout_width="15dp"
-                    android:layout_height="19dp"
-                    android:layout_gravity="end"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    app:srcCompat="@drawable/ic_baseline_close_24" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+
+
+                    <ImageButton
+                        android:id="@+id/btnDelete"
+                        android:layout_width="15dp"
+                        android:layout_height="19dp"
+                        android:layout_gravity="start"
+                        android:layout_marginRight="83dp"
+
+                        app:srcCompat="@drawable/ic_baseline_close_24" />
+
+
+                    <ImageView
+                        android:id="@+id/btnUpdate"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="end"
+                        app:srcCompat="@drawable/editing" />
+
+                </LinearLayout>
+
+
 
 
                 <TextView
@@ -46,8 +68,8 @@
                     android:layout_height="wrap_content"
                     android:padding="4dp"
                     android:text="Task"
-                    android:textSize="20dp"
                     android:textAlignment="center"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -56,8 +78,8 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="description"
-                    android:textSize="20dp"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tvTime"
@@ -71,9 +93,9 @@
 
                 <ImageView
                     android:id="@+id/checkBu"
-                   android:layout_marginTop="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
                     android:visibility="invisible"
                     app:srcCompat="@drawable/check" />
 

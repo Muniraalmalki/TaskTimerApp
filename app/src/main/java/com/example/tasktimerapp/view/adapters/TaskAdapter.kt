@@ -1,6 +1,5 @@
 package com.example.tasktimerapp.view.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -25,30 +24,24 @@ class TaskAdapter(private val activity: MainActivity): RecyclerView.Adapter<Task
             tvDescription.text = task.description
             tvTime.text = TimeFormat.getTimerText(task.time)
 
-            if (task.isCompleted) {
-               // cvTask.setBackgroundColor(Color.parseColor("#c5eae6"))
-
-                checkBu.isVisible = true
-            } else {
-            checkBu.isVisible = false
-                /// cvTask.setBackgroundColor(Color.parseColor("#8CD5CD"))
-            }
+            checkBu.isVisible = task.isCompleted
 
             tvTime.setOnClickListener {
                 activity.startStopTapped(tvTime, task)
             }
-//            checkBu.setOnClickListener {
-//                activity.updateIsCompletedTask(task.isCompleted, task)
-//
-//            }
 
             cvTask.setOnClickListener {
                 activity.updateIsCompletedTask(task.isCompleted, task)
             }
             btnDelete.setOnClickListener {
-                activity.deleteTask(task)
+                activity.dialog("delete", task,)
+            }
+
+            btnUpdate.setOnClickListener{
+                activity.dialog("update", task,)
             }
         }
+
     }
 
     override fun getItemCount() = tasks.size
